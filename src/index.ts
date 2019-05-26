@@ -18,19 +18,14 @@ const app = express();
 app.use(bodyParser.json())
 // login router gives the token with userId and userRol inside validated for 1 hour
 
-// {
-//     "username": "username",
-//     "password": "password"
-//  }
-app.use(cors({
-    origin: 'http://localhost:3000',
-    credentials: true,
-}));
+
 app.post('/api/login',authRouter)
 
 //retrict the access to any route of our domain if you are not authenticated
 app.use('',authenticateMiddleware)
+
 app.use(fileUpload());
+
 //redirect to usersRouter
 app.use('/api/users',userRouter);
 
